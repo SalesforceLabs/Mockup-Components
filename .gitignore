@@ -4,6 +4,9 @@
 
 *.code-workspace
 
+# temporary files
+.tmp
+
 # Salesforce cache
 .sfdx/
 .localdevserver/
@@ -43,6 +46,7 @@ createTemplateProject.sh
 
 # coverage
 coverage/
+junit
 
 # keys / ci
 # keys/*

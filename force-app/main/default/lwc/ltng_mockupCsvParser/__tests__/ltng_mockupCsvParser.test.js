@@ -47,6 +47,26 @@ Bob, Parr, 42, Red`,
   )
 };
 
+/**
+ * Compares two LabelValue tables
+ * @param {LabelValue[][]} expectedLabelValue
+ * @param {LabelValue[][]} resultLabelValue
+ * @return {boolean}
+ */
+function compareLabelValueTables(expectedLabelValue, resultLabelValue) {
+  let resultRow;
+  let resultLV;
+
+  expectedLabelValue.forEach((expectedRow, rowIndex) => {
+    resultRow = resultLabelValue[rowIndex];
+    expectedRow.forEach((expectedLV, lvIndex) => {
+      resultLV = resultRow[lvIndex];
+      expect(expectedLV.label).toBe(resultLV.label);
+      expect(expectedLV.value).toBe(resultLV.value);
+    });
+  })
+}
+
 describe('c-ltng_mockupCsvParser', () => {
   it('all imports are found', () => {
     expect(ltng_mockupCsvParser).toBeTruthy();
@@ -119,6 +139,10 @@ describe('c-ltng_mockupCsvParser', () => {
       var csvLine = null;
       var csvParse = null;
       var expected = null;
+
+      csvLine = null;
+      csvParse = nextCsvStringCell(csvLine);
+      expected = null;
 
       csvLine = '    ';
       csvParse = nextCsvStringCell(csvLine);
@@ -236,10 +260,26 @@ describe('c-ltng_mockupCsvParser', () => {
       var csvParse = null;
       var expected = [];
 
+      csvLine = null;
+      csvParse = parseCsvLine(csvLine);
+      expected = [];
+
       csvLine = '    ';
       csvParse = parseCsvLine(csvLine);
       expected = [];
 
+      expect(csvParse).toStrictEqual(expected);
+      
+      csvLine = ' one ,';
+      csvParse = parseCsvLine(csvLine);
+      expected = ['one'];
+  
+      expect(csvParse).toStrictEqual(expected);
+      
+      csvLine = ' one , two, ';
+      csvParse = parseCsvLine(csvLine);
+      expected = ['one', 'two'];
+  
       expect(csvParse).toStrictEqual(expected);
       
       csvLine = ' , two, three';
@@ -349,6 +389,7 @@ describe('c-ltng_mockupCsvParser', () => {
 
       expect(csvParse).toStrictEqual(expected);
     });
+
     it('when the data is valid', () => {
       let csv;
       let csvParse;
@@ -362,7 +403,8 @@ describe('c-ltng_mockupCsvParser', () => {
 
       expect(csvParse.data).not.toBeNull();
       expect(csvParse.data.length).toStrictEqual(expected.data.length);
-      expect(JSON.stringify(csvParse.data)).toStrictEqual(JSON.stringify(expected.data));
+
+      compareLabelValueTables(expected.data, csvParse.data);
     });
 
     it('can use escaped newlines for tables', () => {
