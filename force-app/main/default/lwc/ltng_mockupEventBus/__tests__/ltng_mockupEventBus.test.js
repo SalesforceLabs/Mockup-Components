@@ -108,7 +108,7 @@ class TestSettings {
    * Registers for the change event
    */
   registerForEvents() {
-    registerListener(EVENT_CHANGE, this.receiver.handleChange, this.receiver);
+    registerListener(EVENT_CHANGE, this.receiver.handleChange, this.receiver, this.receiver.pageRef);
     registerListener(EVENT_CHANGE, this.otherReceiver.handleChange, this.otherReceiver);
     registerListener(EVENT_ELSE, this.receiver.handleElse, this.receiver);
     registerListener(EVENT_ELSE, this.otherReceiver.handleElse, this.otherReceiver);

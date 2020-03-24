@@ -18,7 +18,9 @@ workflows:
       - build:
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - ci_fix
 
 #  nightly:
 #    triggers:
@@ -126,10 +128,11 @@ jobs:
 ###            note: -l RunLocalTests?
 #      - store_test_results:
 #          path: ~/junit
+## Getting Error: ENOMEM: not enough memory, read
       - run:
           name: Test LWC
           command: |
-            npm run test:lwc:coverage --coverage
+            npm run test:lwc:coverage
           env:
             CI: true
       - store_artifacts:

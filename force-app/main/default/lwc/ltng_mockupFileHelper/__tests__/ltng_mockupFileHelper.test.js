@@ -53,7 +53,8 @@ const EXAMPLE_FILE_PATH = '/path/to/my/file';
  * Default properties to assign to the MockupFileReader instances
  */
 const defaultProperties = {
-  showDropDownSpacer: false
+  showDropDownSpacer: false,
+  isCollapsible: true
 };
 
 /**
@@ -442,6 +443,193 @@ describe('c-ltng_mockupFileHelper', () => {
     // expect(div.textContent).toBe('Hello, World!');
   });
 
+  describe('expand/contract', () => {
+    it('includes the icon to expand / contract if expandable', () => {
+      const ts = new TestSettings()
+        .applyDefaultProperties()
+        .customSetup(customTS => {
+          customTS.element.isCollapsible = true;
+          customTS.element.isExpanded = false;
+        })
+        .firePageReference()
+        .fireFindFilesRecent()
+        .attachElement();
+      
+      expect(ts.element.isCollapsible).toBe(true);
+      expect(ts.element.isExpanded).toBe(false);
+
+      const baseDiv = ts.element.shadowRoot.querySelector('.static-resource-helper');
+      expect(baseDiv).toBeTruthy();
+      expect(baseDiv.classList).not.toContain('slds-is-open');
+
+      const header = ts.element.shadowRoot.querySelector('.slds-section__title');
+      expect(header).toBeTruthy();
+      const switchIcon = header.querySelector('lightning-icon');
+      expect(switchIcon).toBeTruthy();
+
+      let sectionContent = ts.element.shadowRoot.querySelector('.slds-section__content');
+      expect(sectionContent.getAttribute('aria-hidden')).toBe('true');
+    });
+
+    it('does not include the icon to expand/contract if not contractable', () => {
+      const ts = new TestSettings()
+        .applyDefaultProperties()
+        .customSetup(customTS => {
+          customTS.element.isCollapsible = false;
+          customTS.element.isExpanded = false;
+        })
+        .firePageReference()
+        .fireFindFilesRecent()
+        .attachElement();
+      
+      expect(ts.element.isCollapsible).toBe(false);
+      expect(ts.element.isExpanded).toBe(true);
+
+      const baseDiv = ts.element.shadowRoot.querySelector('.static-resource-helper');
+      expect(baseDiv).toBeTruthy();
+      expect(baseDiv.classList).toContain('slds-is-open');
+
+      const header = ts.element.shadowRoot.querySelector('.slds-section__title');
+      expect(header).toBeTruthy();
+      const switchIcon = header.querySelector('lightning-icon');
+      expect(switchIcon).toBeFalsy();
+
+      let sectionContent = ts.element.shadowRoot.querySelector('.slds-section__content');
+      expect(sectionContent.getAttribute('aria-hidden')).toBe('false');
+    });
+
+    it('has the open style if is is not collapsible', () => {
+      const ts = new TestSettings()
+        .applyDefaultProperties()
+        .customSetup(customTS => {
+          customTS.element.isCollapsible = false;
+          customTS.element.isExpanded = false;
+        })
+        .firePageReference()
+        .fireFindFilesRecent()
+        .attachElement();
+      
+      expect(ts.element.isCollapsible).toBe(false);
+      expect(ts.element.isExpanded).toBe(true);
+
+      const baseDiv = ts.element.shadowRoot.querySelector('.static-resource-helper');
+      expect(baseDiv).toBeTruthy();
+      expect(baseDiv.classList).toContain('slds-is-open');
+
+      const header = ts.element.shadowRoot.querySelector('.slds-section__title');
+      expect(header).toBeTruthy();
+      const switchIcon = header.querySelector('lightning-icon');
+      expect(switchIcon).toBeFalsy();
+
+      let sectionContent = ts.element.shadowRoot.querySelector('.slds-section__content');
+      expect(sectionContent.getAttribute('aria-hidden')).toBe('false');
+    });
+
+    it('has the expandable class if collapsible and immediately expanded', () => {
+      const ts = new TestSettings()
+        .applyDefaultProperties()
+        .customSetup(customTS => {
+          customTS.element.isCollapsible = true;
+          customTS.element.isExpanded = true;
+        })
+        .firePageReference()
+        .fireFindFilesRecent()
+        .attachElement();
+      
+      expect(ts.element.isCollapsible).toBe(true);
+      expect(ts.element.isExpanded).toBe(true);
+
+      const baseDiv = ts.element.shadowRoot.querySelector('.static-resource-helper');
+      expect(baseDiv).toBeTruthy();
+      expect(baseDiv.classList).toContain('slds-is-open');
+
+      const header = ts.element.shadowRoot.querySelector('.slds-section__title');
+      expect(header).toBeTruthy();
+      const switchIcon = header.querySelector('lightning-icon');
+      expect(switchIcon).toBeTruthy();
+    });
+
+    it('can be closed if the header is clicked and it is expanded', () => {
+      const ts = new TestSettings()
+        .applyDefaultProperties()
+        .customSetup(customTS => {
+          customTS.element.isCollapsible = true;
+          customTS.element.isExpanded = true;
+        })
+        .firePageReference()
+        .fireFindFilesRecent()
+        .attachElement();
+      
+      let baseDiv = ts.element.shadowRoot.querySelector('.static-resource-helper');
+      let header = ts.element.shadowRoot.querySelector('.slds-section__title');
+      let sectionContent = ts.element.shadowRoot.querySelector('.slds-section__content');
+
+      const clickEvent = new CustomEvent('click');
+      header.dispatchEvent(clickEvent);
+
+      return Promise.resolve().then(() => {
+        expect(ts.element.isExpanded).toBeFalsy();
+        expect(baseDiv.classList).not.toContain('slds-is-open');
+        expect(sectionContent.getAttribute('aria-hidden')).toBe('true');
+      });
+    });
+
+    it('can be opened if the header is clicked and it is closed', () => {
+      const ts = new TestSettings()
+        .applyDefaultProperties()
+        .customSetup(customTS => {
+          customTS.element.isCollapsible = true;
+          customTS.element.isExpanded = false;
+        })
+        .firePageReference()
+        .fireFindFilesRecent()
+        .attachElement();
+      
+      let baseDiv = ts.element.shadowRoot.querySelector('.static-resource-helper');
+      let header = ts.element.shadowRoot.querySelector('.slds-section__title');
+      let sectionContent = ts.element.shadowRoot.querySelector('.slds-section__content');
+
+      const clickEvent = new CustomEvent('click');
+      header.dispatchEvent(clickEvent);
+
+      return Promise.resolve().then(() => {
+        expect(ts.element.isExpanded).toBeTruthy();
+        expect(baseDiv.classList).toContain('slds-is-open');
+        expect(sectionContent.getAttribute('aria-hidden')).toBe('false');
+      });
+    });
+
+    it('cannot be opened if the header is clicked and is not collapsible', () => {
+      const ts = new TestSettings()
+        .applyDefaultProperties()
+        .customSetup(customTS => {
+          customTS.element.isCollapsible = false;
+        })
+        .firePageReference()
+        .fireFindFilesRecent()
+        .attachElement();
+
+      expect(ts.element.isCollapsible).toBe(false);
+      expect(ts.element.isExpanded).toBe(true);
+      
+      let baseDiv = ts.element.shadowRoot.querySelector('.static-resource-helper');
+      let header = ts.element.shadowRoot.querySelector('.slds-section__title');
+      let sectionContent = ts.element.shadowRoot.querySelector('.slds-section__content');
+
+      expect(baseDiv.classList).toContain('slds-is-open');
+      expect(sectionContent.getAttribute('aria-hidden')).toBe('false');
+
+      const clickEvent = new CustomEvent('click');
+      header.dispatchEvent(clickEvent);
+
+      return Promise.resolve().then(() => {
+        expect(ts.element.isExpanded).toBeTruthy();
+        expect(baseDiv.classList).toContain('slds-is-open');
+        expect(sectionContent.getAttribute('aria-hidden')).toBe('false');
+      });
+    });
+  });
+
   describe('File select options', () => {
     it('the options include a NEW option if the text is currently set', () => {
       const newFileName = 'some new file';
@@ -484,21 +672,18 @@ describe('c-ltng_mockupFileHelper', () => {
 
       const expected = [
         {"icon": "standard:file", "key": "069R0000000qydRIAQ", "label": "ltng_smallLightTest",
-          "subLabel": "3/19/2020, 11:31:32 AM",
           "value": {
             "Id": "069R0000000qydRIAQ", "LastModifiedDate": "2020-03-19T16:31:32.000Z",
             "LatestPublishedVersionId": "068R0000000rAHiIAM", "Title": "ltng_smallLightTest"
           }
         },
         {"icon": "standard:file", "key": "069R0000000qs3SIAQ", "label": "ltng_Button Strip",
-          "subLabel": "3/19/2020, 11:25:40 AM",
           "value": {
             "Id": "069R0000000qs3SIAQ", "LastModifiedDate": "2020-03-19T16:25:40.000Z",
             "LatestPublishedVersionId": "068R0000000rAH4IAM", "Title": "ltng_Button Strip"
           }
         },
         {"icon": "standard:file", "key": "069R0000000qrzzIAA", "label": "ltng_Button Bar",
-          "subLabel": "3/17/2020, 9:01:57 AM",
           "value": {
             "Id": "069R0000000qrzzIAA", "LastModifiedDate": "2020-03-17T14:01:57.000Z",
             "LatestPublishedVersionId": "068R0000000r3bjIAA", "Title": "ltng_Button Bar"
@@ -506,7 +691,16 @@ describe('c-ltng_mockupFileHelper', () => {
         }
       ];
 
-      expect(combobox.options).toStrictEqual(expected);
+      expect(combobox.options).toBeTruthy();
+      expect(combobox.options.length).toBe(expected.length);
+
+      const filteredOptions = combobox.options.map(option => {
+        // eslint-disable-next-line
+        const {subLabel, ...rest} = option; //-- the very point is not to use subLabel as it impacts timezones
+        return {...rest};
+      });
+
+      expect(filteredOptions).toStrictEqual(expected);
     });
 
     it('shows a notification if the wire call errors', () => {
@@ -697,6 +891,41 @@ describe('c-ltng_mockupFileHelper', () => {
       const combobox = ts.getCombobox();
 
       const someValue = 'Some Text';
+      combobox.text = someValue;
+      expect(combobox.value).toBe(someValue);
+
+      const keyUpEvent = new CustomEvent('keyup', {
+        keyCode: 20,
+        detail: {
+          keyCode: 20
+        }
+      });
+      combobox.dispatchEvent(keyUpEvent);
+
+      let expectedValue = '';
+      let queryTermFound = ts.element.queryTerm;
+      expect(queryTermFound).toBe(expectedValue);
+
+      //-- now let the timer play out
+      jest.runAllTimers();
+
+      expectedValue = someValue;
+      queryTermFound = ts.element.queryTerm;
+      expect(queryTermFound).toBe(expectedValue);
+    });
+
+    it('still searches if the user clears the combobox', () => {
+      jest.useFakeTimers();
+
+      const ts = new TestSettings()
+        .applyDefaultProperties()
+        .firePageReference()
+        .fireFindFilesRecent()
+        .attachElement();
+      
+      const combobox = ts.getCombobox();
+
+      const someValue = '';
       combobox.text = someValue;
       expect(combobox.value).toBe(someValue);
 

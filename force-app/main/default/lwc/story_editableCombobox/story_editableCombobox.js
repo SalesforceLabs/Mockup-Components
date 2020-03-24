@@ -1,3 +1,6 @@
+/* istanbul ignore file */
+
+/* eslint-disable no-unused-vars */
 
 /**
  * More complex demo allowing multiple scenes to be tested.
