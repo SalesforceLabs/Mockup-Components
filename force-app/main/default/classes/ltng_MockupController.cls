@@ -1,7 +1,7 @@
 /**
  * Controller for the Mockup components.
  **/
-global class ltng_MockupController extends VisualEditor.DynamicPicklist {
+global with sharing class ltng_MockupController extends VisualEditor.DynamicPicklist {
     
     /** default resource URL **/
 	public static final String DEFAULT_RESOURCE_URL = '/resource/ltng_ExamplePlaceholderImage';
@@ -55,30 +55,45 @@ global class ltng_MockupController extends VisualEditor.DynamicPicklist {
 
         ltng_mockupSettings__c mockupSettings = ltng_mockupSettings__c.getOrgDefaults();
         String selectionFilter = null;
+        String resourceAddress = null;
         
         if (mockupSettings != null && !String.isEmpty(mockupSettings.Mock_Image_File_Filter__c)) {
             selectionFilter = '%' + mockupSettings.Mock_Image_File_Filter__c + '%';
             for (StaticResource resource : [
-                SELECT Name
+                SELECT NamespacePrefix, Name
                 FROM StaticResource
                 WHERE Name like :selectionFilter
                 ORDER BY LastModifiedDate desc
             ]){
-                row = new VisualEditor.DataRow(resource.Name, resource.Name);
+                row = new VisualEditor.DataRow(resource.Name, generateResourcePath(resource.NamespacePrefix, resource.Name));
                 myValues.addRow(row);
             }
         } else {
             for (StaticResource resource : [
-                SELECT Name
+                SELECT NamespacePrefix, Name
                 FROM StaticResource
                 ORDER BY LastModifiedDate desc
             ]){
-                row = new VisualEditor.DataRow(resource.Name, resource.Name);
+                row = new VisualEditor.DataRow(resource.Name, generateResourcePath(resource.NamespacePrefix, resource.Name));
                 myValues.addRow(row);
             }
         }
 
         return myValues;
+    }
+
+    /**
+     * Determines the path of a resource (resourceNamespace __ resourceName)
+     * @param (String) resourceNamespace - the namespace of the resource (ex: from managed package)
+     * @param (String) resourceName - the name of the resource
+     * @returns (String) - `${resourceNamespace}__${resourceName}` or `${resourceName}`
+     */
+    @TestVisible
+    private static String generateResourcePath(String resourceNamespace, String resourceName) {
+        if (!String.isEmpty(resourceNamespace)) {
+            return resourceNamespace + '__' + resourceName;
+        }
+        return resourceName;
     }
 
     /**

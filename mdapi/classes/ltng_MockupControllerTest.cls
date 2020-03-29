@@ -33,6 +33,22 @@ private class ltng_MockupControllerTest {
         //-- we don't want to get more in depth because the URL format may change
     }
 
+    @isTest static void verifyResourceWithNamespace() {
+        String resourceNamespace = 'mockcomp';
+        String resourceName = 'testResource';
+        String expected = 'mockcomp__testResource';
+        String results = ltng_MockupController.generateResourcePath(resourceNamespace, resourceName);
+        System.assertEquals(expected, results, 'Expect the path to include the namespace');
+    }
+
+    @isTest static void verifyResourceWithoutNamespace() {
+        String resourceNamespace = '';
+        String resourceName = 'testResource';
+        String expected = 'testResource';
+        String results = ltng_MockupController.generateResourcePath(resourceNamespace, resourceName);
+        System.assertEquals(expected, results, 'No Namespace, so the path should just be the resource');
+    }
+
     @isTest static void resourceAvailableForSingleURL() {
         String resourceURL = ltng_MockupController.determineResourceURLs(RESOURCE_NAME);
 

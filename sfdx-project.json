@@ -4,13 +4,13 @@
             "path": "force-app",
             "default": true,
             "package": "ltng-support-mockup-components",
-            "versionName": "ver 1.2",
-            "versionNumber": "1.2.0.NEXT"
+            "versionName": "1.2.1",
+            "versionNumber": "1.2.1.NEXT"
         }
     ],
     "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "47.0",
+    "sourceApiVersion": "49.0",
     "packageAliases": {
         "ltng-support-mockup-components": "0Ho3s000000KyoGCAS",
         "ltng-support-mockup-components@0.1.0-1": "04t3s000003OodhAAC",
@@ -18,6 +18,8 @@
         "ltng-support-mockup-components@0.1.0-3": "04t3s000003OodrAAC",
         "ltng-support-mockup-components@1.0.0-1": "04t3s000003OodwAAC",
         "ltng-support-mockup-components@1.1.0-1": "04t3s000003OoeQAAS",
-        "ltng-support-mockup-components@1.1.0-2": "04t3s000003OoiiAAC"
+        "ltng-support-mockup-components@1.1.0-2": "04t3s000003OoiiAAC",
+        "ltng-support-mockup-components@1.2.0-1": "04t3s000003OoinAAC",
+        "ltng-support-mockup-components@1.2.1-1": "04t3s000003OonPAAS"
     }
 }

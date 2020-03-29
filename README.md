@@ -47,9 +47,6 @@ so we can get feedback right away.
 
 ---
 
-NOTE: This project is for demonstration purposes.
-For more information, please see the [Licensing](#licensing) section below
-
 # How to Use
 
 ## Using Components
@@ -92,13 +89,18 @@ While there are [Demo App Builder Pages using these components](#accessing-the-d
 
 Please note that a sample page with the components shown are provided in the package.
 
-Assigning the `ltng_MockupDemoParticipant` permission set will grant you access to the `Mockup Example App Page` used in many of these demonstrations.
+Assigning the `ltng_MockupDemoParticipant` permission set will grant you access to the `Mockup Component Overview Page` used in many of these demonstrations.
 
 ![Screenshot of the Tab](docs/images/AccessTab.png)
 
 However, it is purely a demonstration and not required for use.
 
 
+## Uploading from Mobile
+
+An additional App Builder Page named 'File Helper' is also supplied.  If desired, this can be added to Mobile Navigation to give a one stop shop to upload images during a whiteboarding session.
+
+![Example of the File Helper on Mobile](docs/images/uploadFromPhone.gif)
 
 ## General
 
@@ -144,9 +146,15 @@ Capture what you know about them to keep the conversation going.
 
 Using Sticky-Notes or Whiteboards, brainstorm how it should look or behave.
 
-![Brainstorm with Drawings](docs/images/flow2.png)
+![Example of the File Helper on Mobile](docs/images/uploadFromPhone.gif)
 
-Use [Mockup File Helper](#file-helper) and [Mockup File Image](#mockup-file-image) to upload images directly from your cell phone.
+Use [Mockup File Helper](#mockup-file-helper) and [Mockup File Image](#mockup-file-image) to upload images directly from your cell phone.
+
+### Ideate with Developers using Playgrounds
+
+Iterate with Developers to keep expectations grounded. If necessary, perform quick iterations using Salesforce Playgrounds or Component Docs to negotiate options or verify assumptions.
+
+![Ideate with Playgrounds screenshot](docs/images/ideateWithPlaygrounds.gif)
 
 ### Formalize with Wireframe Apps
 
@@ -202,11 +210,9 @@ While there are [Demo App Builder Pages using these components](#accessing-the-d
 
 ## Mockup Alert
 
-Placeholders are for times we want to be quick, or sizing is important.
+Useful for showing Errors / Notifications / Warnings.
 
 ![Screenshot of Placeholders](docs/images/alertComponent.png)
-
-Note that this is quite a bit easier size than it would be on a rich text.
 
 #### App Builder Properties
 
@@ -230,11 +236,9 @@ Note that this is quite a bit easier size than it would be on a rich text.
 
 ## Mockup Header
 
-Placeholders are for times we want to be quick, or sizing is important.
+A configurable Lightning Design System Page Header - useful for defining sections.
 
 ![Screenshot of Placeholders](docs/images/headerComponent.png)
-
-Note that this is quite a bit easier size than it would be on a rich text.
 
 #### App Builder Properties
 
@@ -284,7 +288,7 @@ Placeholders are for times we want to be quick, or sizing is important.
 
 ![Screenshot of Placeholders](docs/images/placeholderComponent.png)
 
-Note that this is quite a bit easier size than it would be on a rich text.
+Note that this is quite a bit easier to specify the size than with the standard rich text component.
 
 #### App Builder Properties
 
@@ -306,7 +310,7 @@ Note that this is quite a bit easier size than it would be on a rich text.
 </tr>
 </table>
 
-## Responsive Table
+## Mockup Table
 
 Lightning Experience gives the ability to work with Salesforce from the Mobile Phone and from Desktop.
 
@@ -550,7 +554,7 @@ To specify, create a new Custom Setting record. (Generally company wide, but can
 </tr>
 </table>
 
---
+----
 
 # Install
 
@@ -568,9 +572,9 @@ This works very similar to an App Exchange install.
 
 Please login to an available sandbox and click the link below.
 
-[https://test.salesforce.com/packaging/installPackage.apexp?p0=04t3s000003OoiiAAC](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t3s000003OoiiAAC)
+[https://test.salesforce.com/packaging/installPackage.apexp?p0=04t3s000003OonPAAS](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t3s000003OonPAAS)
 
-(or simply navigate to `https://YOUR_SALESFORCE_INSTANCE/packaging/installPackage.apexp?p0=04t3s000003OoiiAAC` <br />
+(or simply navigate to `https://YOUR_SALESFORCE_INSTANCE/packaging/installPackage.apexp?p0=04t3s000003OonPAAS` <br />
 if you are already logged in)
 
 ![Install for Admins](docs/images/installPackage.png)
@@ -593,13 +597,13 @@ However, the Salesforce CLI can be used with any org and does not require Salesf
 
 #### Installing via package
 
-    sfdx force:package:install -w 10 --package 04t3s000003OoiiAAC -u [[orgAlias]]
+    sfdx force:package:install -w 10 --package 04t3s000003OonPAAS -u [[orgAlias]]
     
 ### Assigning Permission Set
 
 Please note that a sample page with the components shown are provided in the package.
 
-Assigning the `ltng_MockupDemoParticipant` permission set will grant you access to the `Mockup Example App Page` used in many of these demonstrations.
+Assigning the `ltng_MockupDemoParticipant` permission set will grant you access to the `Mockup Component Overview Page` used in many of these demonstrations.
 
 ![Screenshot of the Tab](docs/images/AccessTab.png)
 
@@ -625,4 +629,4 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.0
