@@ -1,9 +1,9 @@
-[![CircleCI](https://circleci.com/gh/SalesforceCloudServices/ltng-support-mockup-components.svg?style=shield&circle-token=e9f229e21244665f91971d91836b8056410ef187)](https://circleci.com/gh/SalesforceCloudServices/ltng-support-mockup-components)
+[![CircleCI](https://circleci.com/gh/CSGStrategicEngagements/ltng-support-mockup-components.svg?style=shield&circle-token=e9f229e21244665f91971d91836b8056410ef187)](https://circleci.com/gh/CSGStrategicEngagements/ltng-support-mockup-components)
 [![Github](https://img.shields.io/badge/license-MIT-343434.svg)](https://choosealicense.com/licenses/mit/)
-[![Stmt Coverage](https://img.shields.io/badge/Stmt%20Coverage-99-00BB00.svg)](https://circleci.com/gh/SalesforceCloudServices/ltng-support-storybook)
-[![Branch Coverage](https://img.shields.io/badge/Branch%20Coverage-97-00BB00.svg)](https://circleci.com/gh/SalesforceCloudServices/ltng-support-mockup-components)
-[![Func Coverage](https://img.shields.io/badge/Func%20Coverage-100-00BB00.svg)](https://circleci.com/gh/SalesforceCloudServices/ltng-support-mockup-components)
-[![Line Coverage](https://img.shields.io/badge/Line%20Coverage-99-00BB00.svg)](https://circleci.com/gh/SalesforceCloudServices/ltng-support-mockup-components)
+[![Stmt Coverage](https://img.shields.io/badge/Stmt%20Coverage-99-00BB00.svg)](https://circleci.com/gh/CSGStrategicEngagements/ltng-support-storybook)
+[![Branch Coverage](https://img.shields.io/badge/Branch%20Coverage-97-00BB00.svg)](https://circleci.com/gh/CSGStrategicEngagements/ltng-support-mockup-components)
+[![Func Coverage](https://img.shields.io/badge/Func%20Coverage-100-00BB00.svg)](https://circleci.com/gh/CSGStrategicEngagements/ltng-support-mockup-components)
+[![Line Coverage](https://img.shields.io/badge/Line%20Coverage-99-00BB00.svg)](https://circleci.com/gh/CSGStrategicEngagements/ltng-support-mockup-components)
 
 # Overview
 
