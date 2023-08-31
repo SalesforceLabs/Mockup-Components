@@ -398,6 +398,7 @@ describe('c-ltng_mockupFileHelper utility/critical methods', () => {
       const resultPromise = ts.element.constants
         .loadFileAsBase64(fileToLoad, mockFileReaderThatFails)
         .catch(err => {
+          // eslint-disable-next-line
           expect(err).toEqual(error);
         });
 

@@ -339,36 +339,6 @@ describe('c-ltng_editableCombobox', () => {
       expect(ts.element.selection).toBeFalsy();
       expect(ts.element.values).toBeFalsy();
     });
-
-    /*
-    it('is changed when the user types after selecting a value', () => {
-      const ts = new TestSettings()
-        .applyDefaultProperties()
-        .attachElement();
-      
-      expect(ts.element.options.length).toBeGreaterThanOrEqual(2);
-
-      const initialText = ts.text;
-      
-      const optionElements = ts.element.shadowRoot
-        .querySelectorAll('c-ltng_editable-combobox_item');
-      expect(optionElements).toBeTruthy();
-      expect(optionElements.length).toBeGreaterThanOrEqual(2);
-
-      const secondOption = optionElements[1];
-      expect(secondOption).toBeTruthy();
-
-      secondOption.dispatchEvent(new CustomEvent('click'));
-
-      debugger;
-
-      expect(ts.element.hasChanged).toBe(false);
-
-      ts.element.text('SOMETHING COMPLETELY DIFFERENT');
-
-      expect(ts.element.hasChanged).toBe(true);
-    });
-    */
   });
 
   describe('open / close', () => {

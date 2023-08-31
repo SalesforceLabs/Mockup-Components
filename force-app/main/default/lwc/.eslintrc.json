@@ -1,3 +1,7 @@
 {
-  "extends": ["@salesforce/eslint-config-lwc/recommended"]
+  "extends": ["@salesforce/eslint-config-lwc/recommended"],
+  "rules": {
+    "jest/no-done-callback": "off",
+    "jest/no-standalone-expect": "off"
+  }
 }

@@ -31,3 +31,4 @@ package.xml
 *.d.ts
 
 **/*test.flexipage-meta.xml
+.sf
